@@ -30,15 +30,17 @@ public class CreateDeleteEditSessionTest extends Base {
     public void setup() throws InterruptedException {
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless=new"); // or "--headless"
+        options.addArguments("--headless=new");
+        options.addArguments("--window-size=1920,1080");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
-        options.addArguments("--remote-allow-origins=*"); // sometimes needed in CI
+        options.addArguments("--remote-allow-origins=*");
         options.addArguments("--user-data-dir=/tmp/chrome-profile-" + System.currentTimeMillis()); // ensure unique profile
 
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
+        //       driver = WebDriverManager.chromedriver().create();
 
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
@@ -77,7 +79,7 @@ public class CreateDeleteEditSessionTest extends Base {
         softAssert.assertEquals(CreateSession.getBrandYourEventText(), EnglishLanguageLabelConstants.Brand_your_event);
         softAssert.assertEquals(CreateSession.getSelectCoverImageText(), EnglishLanguageLabelConstants.SELECT_COVER_IMAGE);
         CreateSession.clickOnSelectOnlineButton();
-        waitInSeconds(5);
+        waitInSeconds(7);
         CreateSession.clickOnImage();
         waitInSeconds(5);
         CreateSession.clickOnConfirmButton();

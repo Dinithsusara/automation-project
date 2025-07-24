@@ -29,7 +29,8 @@ public class WebLoginTest extends Base {
     public void setup() {
 
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless=new"); // or "--headless"
+        options.addArguments("--headless=new");
+        options.addArguments("--window-size=1920,1080");
         options.addArguments("--no-sandbox");
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-gpu");
@@ -38,7 +39,7 @@ public class WebLoginTest extends Base {
 
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver(options);
-
+//        driver = WebDriverManager.chromedriver().create();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.manage().deleteAllCookies();
