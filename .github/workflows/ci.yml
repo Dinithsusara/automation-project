@@ -1,0 +1,30 @@
+name: Run API and UI Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: ⬇️ Checkout code
+      uses: actions/checkout@v3
+
+    - name: ☕ Set up Java
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: 🧪 Run API Tests
+      working-directory: ./api
+      run: mvn test -DsuiteXmlFile=apitc.xml
+
+    - name: 🧪 Run UI Tests
+      working-directory: ./ui
+      run: mvn test -DsuiteXmlFile=uitc.xml
+
