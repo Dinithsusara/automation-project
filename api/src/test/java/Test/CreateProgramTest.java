@@ -20,7 +20,7 @@ public class CreateProgramTest extends Base {
     public void verifyProgramCreationData() {
 
 
-        ProgramCreationData programCreationData = ProgramCreation.createProgram().Data;
+        ProgramCreationData programCreationData = ProgramCreation.createProgram().getData();
 
 
         softAssert.assertEquals(programCreationData.getName(), "TestProgramForWebAPI");

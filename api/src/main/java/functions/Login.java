@@ -26,7 +26,7 @@ public class Login {
                 .formParam("client_secret", "secret")
                 .formParam("grant_type", "password")
                 .formParam("username", "ZGluaXRoamF5YXNla2FyYTVAbGl2ZS5jb20=")
-                .formParam("password", "Tm93eW91c2VlbWVAMTIz&")
+                .formParam("password", "VGVzdGRpbml0aEAxMjM=")
                 .formParam("scope", "scrowd-cp offline_access")
                 .when()
                 .post(Post_UserLogin);
