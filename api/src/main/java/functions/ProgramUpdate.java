@@ -19,7 +19,7 @@ public class ProgramUpdate {
 
     public static UpdateProgramRoot updateProgram() {
 
-        ProgramCreationData programCreationData = ProgramCreation.createProgram().getData();
+        ProgramCreationData programCreationData = ProgramCreation.createProgram().Data;
         int ProgramId = programCreationData.getId();
 
         JSONObject jsonObject = new JSONObject();

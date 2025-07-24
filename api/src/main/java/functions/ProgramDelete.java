@@ -18,7 +18,7 @@ public class ProgramDelete {
 
     public static DeleteProgramRoot deleteProgram() {
 
-        ProgramCreationData programCreationData = ProgramCreation.createProgram().getData();
+        ProgramCreationData programCreationData = ProgramCreation.createProgram().Data;
 
         int ProgramID = programCreationData.getId();
 
