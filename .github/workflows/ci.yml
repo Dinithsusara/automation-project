@@ -1,4 +1,4 @@
-name: Run API and UI Tests
+name: Run API and UI Tests with Coverage
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,11 +20,31 @@ jobs:
           java-version: '23'
           distribution: 'temurin'
 
+      # Run API tests with JaCoCo coverage
       - name: 🧪 Run API Tests
         working-directory: ./api
-        run: mvn test -DsuiteXmlFile=apitc.xml
+        run: |
+          mvn clean test -DsuiteXmlFile=apitc.xml
+          mvn jacoco:report
 
+      # Upload API coverage
+      - name: 📦 Upload API JaCoCo Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-jacoco-report
+          path: ./api/target/site/jacoco
+
+      # Run UI tests with JaCoCo coverage
       - name: 🧪 Run UI Tests
         working-directory: ./ui
-        run: mvn test -DsuiteXmlFile=uitc.xml
+        run: |
+          mvn clean test -DsuiteXmlFile=uitc.xml
+          mvn jacoco:report
+
+      # Upload UI coverage
+      - name: 📦 Upload UI JaCoCo Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-jacoco-report
+          path: ./ui/target/site/jacoco
 
