@@ -5,6 +5,8 @@ import functions.CreateSession;
 import functions.Home;
 import functions.Login;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -26,7 +28,19 @@ public class CreateDeleteEditSessionTest extends Base {
 
     @BeforeMethod(alwaysRun = true)
     public void setup() throws InterruptedException {
-        driver = WebDriverManager.chromedriver().create();
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new"); // or "--headless"
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--remote-allow-origins=*"); // sometimes needed in CI
+        options.addArguments("--user-data-dir=/tmp/chrome-profile-" + System.currentTimeMillis()); // ensure unique profile
+
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver(options);
+
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.manage().deleteAllCookies();

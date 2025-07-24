@@ -4,6 +4,8 @@ import common.EnglishLanguageLabelConstants;
 import functions.Home;
 import functions.Login;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -26,7 +28,17 @@ public class WebLoginTest extends Base {
     @BeforeMethod(alwaysRun = true)
     public void setup() {
 
-        driver = WebDriverManager.chromedriver().create();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless=new"); // or "--headless"
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--remote-allow-origins=*"); // sometimes needed in CI
+        options.addArguments("--user-data-dir=/tmp/chrome-profile-" + System.currentTimeMillis()); // ensure unique profile
+
+        WebDriverManager.chromedriver().setup();
+        driver = new ChromeDriver(options);
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
         driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
         driver.manage().deleteAllCookies();
