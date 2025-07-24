@@ -9,15 +9,18 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 import utils.Base;
+import utils.ScreenshotListener;
 import utils.Utils;
 
 import java.time.Duration;
 
 import static common.UIConstants.WEB_URL;
 
+@Listeners(ScreenshotListener.class)
 public class CreateDeleteEditSessionTest extends Base {
     SoftAssert softAssert = new SoftAssert();
     String EMAIL = Utils.getProperty("email");
