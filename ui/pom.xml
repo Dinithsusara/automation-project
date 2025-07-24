@@ -12,6 +12,18 @@
     <artifactId>ui</artifactId>
     <build>
         <plugins>
+            <!-- 🔧 Java Compilation Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version> <!-- Supports Java 23 -->
+                <configuration>
+                    <source>23</source>
+                    <target>23</target>
+                </configuration>
+            </plugin>
+
+            <!-- 🧪 Surefire Plugin to Run TestNG/JUnit -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
