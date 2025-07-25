@@ -24,7 +24,16 @@ jobs:
         working-directory: ./api
         run: mvn test -DsuiteXmlFile=apitc.xml
 
+      - name: 🖥️ Start virtual display
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y xvfb
+          export DISPLAY=:99
+          Xvfb :99 -screen 0 1920x1080x24 > /dev/null 2>&1 &
+
       - name: 🧪 Run UI Tests
         working-directory: ./ui
+        env:
+          DISPLAY: :99
         run: mvn test -DsuiteXmlFile=uitc.xml
 
